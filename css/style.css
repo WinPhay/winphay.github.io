@@ -1,0 +1,60 @@
+/*Css Document [Author:Win Phay] | [Date:5/2/2016]*/
+.no-margin
+{
+	margin: 0px;
+}
+.no-padding
+{
+	padding: 0px;
+}
+.mi-footer
+{
+	background-color: #222;
+	color: #fff;
+	margin-top: 30px;
+	padding-top: 30px;
+	border-radius:0.45rem;
+	height: auto;
+}
+.mi-bottom-footer
+{
+	border-top: 1px solid #b2b2b2;
+	margin-top: 10px;
+	padding-top: 10px;
+	color: #b2b2b2;
+}
+.footer-nav
+{
+	text-align: right;
+	list-style: none;
+}
+.footer-nav li
+{
+	display:inline;
+}
+.footer-nav li:not(:first-child):before
+{
+	content: '|';
+	padding: 0px 10px;
+}
+.footer-nav a
+{
+	color: #b2b2b2;
+}
+.footer-nav a:hover
+{
+	color: #fff;
+	text-decoration: none;
+}
+body
+{
+	widows: inherit;
+}
+.jumbotron
+{
+	border:1px solid #000; border-radius:0.45rem;
+}
+.header
+{
+	border:2px solid #000; border-radius:0.20rem; overflow:hidden; padding:1em;
+}
