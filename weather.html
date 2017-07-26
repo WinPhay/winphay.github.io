@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Weather Angular App</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.15/angular.min.js"></script>
+</head>
+<body ng-app="app">
+	<div ng-controller="AppCtrl as vm">
+		<!-- <h1>{{ vm.data | json }}</h1> -->
+    	<h1>City: {{vm.data.name}}, {{vm.data.sys.country}}.</h1>
+    	<h1>Location: {{vm.data.coord.lon}}, {{vm.data.coord.lat}}</h1>
+    	<h1>Temperature - {{vm.data.main.temp}} | Min : {{vm.data.main.temp_min}}, Max : {{vm.data.main.temp_max}}</h1>
+    	<h1>Pressure - {{vm.data.main.pressure}} , Humidity - {{vm.data.main.humidity}}</h1>
+    	<h1>Weather - {{vm.data.weather[0].main}} | Description : {{vm.data.weather[0].description}}</h1>
+    	<img id="image-data" ng-src="http://openweathermap.org/img/w/{{vm.data.weather[0].icon}}.png" width="auto">
+  	</div>
+	<script type="text/javascript">
+		var app = angular.module('app', []);
+
+		app.controller('AppCtrl', function($http) {
+		  
+		  var vm = this;
+		  
+		  var URL = 'http://api.openweathermap.org/data/2.5/weather';
+		  
+		  var request = {
+		    method: 'GET',
+		    url: URL,
+		    params: {
+		       q: 'Rangoon',
+		      mode: 'json',
+		      units: 'imperial',
+		      cnt: '7',
+		      appid: '51f87f0c072465405f77a6fc803bc24b'
+		    }
+		  };
+		  
+		  $http(request)
+		    .then(function(response) {
+		      vm.data = response.data;
+		    }).
+		    catch(function(response) {
+		      vm.data = response.data;
+		    });
+		});
+	</script>
+</body>
+</html>
