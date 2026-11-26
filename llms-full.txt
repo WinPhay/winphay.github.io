@@ -1,0 +1,65 @@
+# Saw Win Phay — Full Portfolio & Systems Reference
+
+> Personal portfolio website of Saw Win Phay (`https://winphay.celestrionx.com`).
+> Engineering focus: Deterministic sandboxes, autonomous agent infrastructure, headless DSP compilers, and interactive WebGL graphics under [CelestrionX](https://www.celestrionx.com).
+
+## 1. Profile & Focus
+
+Saw Win Phay (`WinPhay`) designs systems that prioritize determinism, inspectability, and agent-native verification:
+
+1. **Agent Runtimes & Sandboxing**: Containerized command execution, filesystem checkpoint/rollback, secret redaction, and git worktree isolation (`Vessel`).
+2. **Audio & Acoustic Telemetry**: Declarative pure-Rust synthesis graphs compiled headlessly with structured DSP telemetry (`Auralis`).
+3. **Interactive Graphics & Digital Publishing**: Procedural Three.js scenes with zero external `.glb` assets (`winphay.celestrionx.com`) and curated bilingual digital publishing (`stellarpub.celestrionx.com`).
+
+---
+
+## 2. Featured Systems
+
+### Vessel (`v0.6.0`)
+- **Repository**: `https://github.com/WinPhay/vessel`
+- **Role**: Host-shielded, time-traveling container sandbox for autonomous coding agents.
+- **Core Capabilities**: `/workspace`-only mounts, cgroup CPU/RAM quotas, `--network none` isolation, instant checkpoints & Myers delta diffs (`vessel_checkpoint`, `vessel_rollback`, `vessel_checkpoint_diff`), isolated git worktree workflows, headless Chromium inspection, and DLP egress redaction.
+
+### Auralis (`v0.2.1`)
+- **Repository**: `https://github.com/Celestrionx/auralis`
+- **Audio Showcases**: `https://www.celestrionx.com/#demos`
+- **Role**: Headless Rust audio graph compiler and closed-loop telemetry engine (`cargo run -- serve`).
+- **Core Capabilities**: Declarative JSON/YAML `Song` manifests, `Synth` / `SoundFont` / `Sample` backends, multi-threaded track DSP, WAV (`smpl` loop chunks) & OGG Vorbis exports, and 32-window Hann FFT spectral telemetry (`auralis_init_manifest`, `auralis_compile_audio`, `auralis_inspect_soundfont`, `auralis_eval_wav`).
+
+### StellarPub (`Live`)
+- **Domain**: `https://stellarpub.celestrionx.com`
+- **Role**: Burmese digital literature catalog and OTA Godot 4 `.pck` distribution pipeline.
+
+---
+
+## 3. Site Architecture (`winphay.celestrionx.com`)
+
+- **Interactive 3D Scene**: Procedural Three.js `r170` scene (`scene.js`) facing South (`E ← S → W`), driven by live local time (`new Date()`) or deterministic URL parameters (`?time=dawn|noon|dusk|night`, `?hour=22.5`).
+  - Daytime: Rising East sunrise, drifting 3D cloud clusters, ocean glare, smooth horizon sky shader.
+  - Nighttime: Twinkling starfield, orbital Moon reflection path, shoreline campfire particle embers and sand light.
+- **Dual Human / Agent Interface**: Toggle between `Wide`, `Side`, `Agent`, and `Hide UI` views directly in the HUD (or open `?mode=agent` / `?ui=agent` to inspect raw machine-readable docs inside the browser).
+
+---
+
+## 4. Mini-Blog Index (`/posts/`)
+
+Metadata index: `https://winphay.celestrionx.com/posts/index.json`
+
+1. **Zero-Asset Procedural South Beach in Three.js** (`Graphics`, `2026-11-26`, 3 min)
+   - Raw Markdown: `https://winphay.celestrionx.com/posts/procedural-south-beach-threejs.md`
+   - Summary: Syncing a south-facing shoreline, East-to-West solar/lunar arcs, drifting clouds, stars, and a flickering night campfire strictly to local browser time—with zero `.glb` files.
+2. **Why Audio Agents Need Compilers and FFT Telemetry** (`AI`, `2026-11-26`, 4 min)
+   - Raw Markdown: `https://winphay.celestrionx.com/posts/auralis-audio-telemetry.md`
+   - Summary: Treating music as deterministic Rust code: static pre-render linting, parallel DSP, and closed-loop acoustic feedback in Auralis.
+3. **Time-Traveling Sandboxes for Coding Agents** (`Systems`, `2026-11-20`, 3 min)
+   - Raw Markdown: `https://winphay.celestrionx.com/posts/vessel-agent-sandboxes.md`
+   - Summary: How Vessel isolates autonomous agent execution with sub-second filesystem checkpoints, DLP secret redaction, and git worktrees.
+
+---
+
+## 5. Contact & Links
+
+- Website: `https://winphay.celestrionx.com`
+- GitHub: `https://github.com/WinPhay`
+- Parent Umbrella: `https://www.celestrionx.com`
+- Email: `hello@celestrionx.com`

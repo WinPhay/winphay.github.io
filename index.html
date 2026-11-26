@@ -6,7 +6,39 @@
   <title>Saw Win Phay — Systems &amp; Creative Engineering</title>
   <meta name="description" content="Personal portfolio website of Saw Win Phay." />
   <link rel="canonical" href="https://winphay.celestrionx.com" />
+  <link rel="alternate" type="text/markdown" href="https://winphay.celestrionx.com/index.md" />
+  <link rel="help" type="text/plain" href="https://winphay.celestrionx.com/llms.txt" />
+  <link rel="help" type="text/plain" href="https://winphay.celestrionx.com/llms-full.txt" />
   <link rel="icon" href="data:," />
+
+  <meta property="og:title" content="Saw Win Phay — Systems &amp; Creative Engineering" />
+  <meta property="og:description" content="Personal portfolio website of Saw Win Phay." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://winphay.celestrionx.com" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Saw Win Phay — Systems &amp; Creative Engineering" />
+  <meta name="twitter:description" content="Personal portfolio website of Saw Win Phay." />
+
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Saw Win Phay",
+      "alternateName": "WINPHAY",
+      "url": "https://winphay.celestrionx.com",
+      "email": "hello@celestrionx.com",
+      "worksFor": {
+        "@type": "Organization",
+        "name": "CelestrionX",
+        "url": "https://www.celestrionx.com"
+      },
+      "sameAs": [
+        "https://github.com/WinPhay",
+        "https://www.celestrionx.com"
+      ]
+    }
+  </script>
+
   <link rel="stylesheet" href="styles.css" />
 
   <script type="importmap">
@@ -49,6 +81,7 @@
       <div class="layout-pills" role="group" aria-label="Layout mode">
         <button type="button" class="pill-btn active" data-layout-target="wide">Wide</button>
         <button type="button" class="pill-btn" data-layout-target="side">Side</button>
+        <button type="button" class="pill-btn" data-layout-target="agent">Agent</button>
         <button type="button" class="pill-btn" data-layout-target="hidden">Hide UI</button>
       </div>
     </div>
@@ -57,57 +90,96 @@
   <main class="shell" id="overlay-shell">
     <div class="beach-window-spacer" aria-hidden="true"></div>
     <aside class="glass-panel" aria-label="Profile and Mini-Blog">
-      <div class="hero-grid">
-        <section class="intro-block">
-          <p class="kicker">SYSTEMS · AGENTS · DIGITAL CRAFT</p>
-          <h1>Saw Win Phay</h1>
-          <p class="bio">
-            Building deterministic sandboxes (<a href="https://github.com/WinPhay/vessel" target="_blank" rel="noopener noreferrer">Vessel</a>),
-            headless audio compilers (<a href="https://github.com/Celestrionx/auralis" target="_blank" rel="noopener noreferrer">Auralis</a>),
-            and digital publishing (<a href="https://stellarpub.celestrionx.com" target="_blank" rel="noopener noreferrer">StellarPub</a>) under
-            <a href="https://www.celestrionx.com" target="_blank" rel="noopener noreferrer">CelestrionX</a>.
-          </p>
+      <div id="human-view" class="human-view">
+        <div class="hero-grid">
+          <section class="intro-block">
+            <p class="kicker">SYSTEMS · AGENTS · DIGITAL CRAFT</p>
+            <h1>Saw Win Phay</h1>
+            <p class="bio">
+              Building deterministic sandboxes (<a href="https://github.com/WinPhay/vessel" target="_blank" rel="noopener noreferrer">Vessel</a>),
+              headless audio compilers (<a href="https://github.com/Celestrionx/auralis" target="_blank" rel="noopener noreferrer">Auralis</a>),
+              and digital publishing (<a href="https://stellarpub.celestrionx.com" target="_blank" rel="noopener noreferrer">StellarPub</a>) under
+              <a href="https://www.celestrionx.com" target="_blank" rel="noopener noreferrer">CelestrionX</a>.
+            </p>
 
-          <div class="quick-links">
-            <a href="https://github.com/WinPhay" target="_blank" rel="noopener noreferrer">GitHub</a>
-            <a href="https://www.celestrionx.com" target="_blank" rel="noopener noreferrer">CelestrionX</a>
-            <a href="https://stellarpub.celestrionx.com" target="_blank" rel="noopener noreferrer">StellarPub</a>
-            <a href="mailto:hello@celestrionx.com">Contact</a>
+            <div class="quick-links">
+              <a href="https://github.com/WinPhay" target="_blank" rel="noopener noreferrer">GitHub</a>
+              <a href="https://www.celestrionx.com" target="_blank" rel="noopener noreferrer">CelestrionX</a>
+              <a href="https://stellarpub.celestrionx.com" target="_blank" rel="noopener noreferrer">StellarPub</a>
+              <a href="mailto:hello@celestrionx.com">Contact</a>
+            </div>
+          </section>
+
+          <section class="systems-block" aria-label="Featured Systems">
+            <div class="systems-card">
+              <span class="sys-tag">SANDBOX · MCP</span>
+              <strong>Vessel</strong>
+              <p>Containerized execution shield, sub-second checkpoints, DLP redaction &amp; git worktrees.</p>
+            </div>
+            <div class="systems-card">
+              <span class="sys-tag">AUDIO · RUST</span>
+              <strong>Auralis</strong>
+              <p>Offline audio graph compiler with static pre-linting &amp; Hann FFT telemetry loops.</p>
+            </div>
+          </section>
+        </div>
+
+        <section class="blog-block" aria-label="Mini-Blog">
+          <div class="blog-header">
+            <h2>Mini-Blog</h2>
+            <div class="tag-filters" id="tag-filters">
+              <button type="button" class="tag-btn active" data-tag="All">All</button>
+              <button type="button" class="tag-btn" data-tag="Graphics">Graphics</button>
+              <button type="button" class="tag-btn" data-tag="AI">AI</button>
+              <button type="button" class="tag-btn" data-tag="Systems">Systems</button>
+            </div>
           </div>
+
+          <div id="post-list" class="post-list"></div>
+
+          <article id="post-reader" class="post-reader hidden" aria-live="polite">
+            <button type="button" class="back-btn" id="back-to-posts">← All Posts</button>
+            <div class="reader-meta" id="reader-meta"></div>
+            <div class="reader-body" id="reader-body"></div>
+          </article>
         </section>
 
-        <section class="systems-block" aria-label="Featured Systems">
-          <div class="systems-card">
-            <span class="sys-tag">SANDBOX · MCP</span>
-            <strong>Vessel</strong>
-            <p>Containerized execution shield, sub-second checkpoints, DLP redaction &amp; git worktrees.</p>
+        <footer class="endpoints-footer" aria-label="Agent endpoints">
+          <span>AGENT SURFACES</span>
+          <div class="endpoint-links">
+            <a href="agents.md">/agents.md</a>
+            <a href="llms.txt">/llms.txt</a>
+            <a href="llms-full.txt">/llms-full.txt</a>
+            <a href="index.md">/index.md</a>
           </div>
-          <div class="systems-card">
-            <span class="sys-tag">AUDIO · RUST</span>
-            <strong>Auralis</strong>
-            <p>Offline audio graph compiler with static pre-linting &amp; Hann FFT telemetry loops.</p>
-          </div>
-        </section>
+        </footer>
       </div>
 
-      <section class="blog-block" aria-label="Mini-Blog">
-        <div class="blog-header">
-          <h2>Mini-Blog</h2>
-          <div class="tag-filters" id="tag-filters">
-            <button type="button" class="tag-btn active" data-tag="All">All</button>
-            <button type="button" class="tag-btn" data-tag="Graphics">Graphics</button>
-            <button type="button" class="tag-btn" data-tag="AI">AI</button>
-            <button type="button" class="tag-btn" data-tag="Systems">Systems</button>
+      <section id="agent-view" class="agent-view" aria-label="Machine-readable agent interface">
+        <div class="agent-banner">
+          <div>
+            <p class="kicker">AGENT INTERFACE // RAW MARKDOWN &amp; LLMS.TXT</p>
+            <h2>Machine-Readable Portfolio Endpoints</h2>
+            <p class="agent-sub">
+              Served natively from GitHub Pages. Run <code>curl -sL https://winphay.celestrionx.com/llms.txt</code> or inspect tabs below.
+            </p>
+          </div>
+          <div class="agent-actions">
+            <button type="button" class="pill-btn active" id="copy-agent-doc">Copy Markdown</button>
+            <a class="action-link" id="agent-raw-link" href="agents.md" target="_blank" rel="noopener noreferrer">Open Raw ↗</a>
           </div>
         </div>
 
-        <div id="post-list" class="post-list"></div>
+        <div class="doc-tabs" role="tablist" aria-label="Agent documents">
+          <button type="button" class="tag-btn active" role="tab" data-doc="agents.md" aria-selected="true">/agents.md</button>
+          <button type="button" class="tag-btn" role="tab" data-doc="llms.txt" aria-selected="false">/llms.txt</button>
+          <button type="button" class="tag-btn" role="tab" data-doc="llms-full.txt" aria-selected="false">/llms-full.txt</button>
+          <button type="button" class="tag-btn" role="tab" data-doc="index.md" aria-selected="false">/index.md</button>
+        </div>
 
-        <article id="post-reader" class="post-reader hidden" aria-live="polite">
-          <button type="button" class="back-btn" id="back-to-posts">← All Posts</button>
-          <div class="reader-meta" id="reader-meta"></div>
-          <div class="reader-body" id="reader-body"></div>
-        </article>
+        <div class="agent-code-wrap">
+          <pre id="agent-doc-content" class="agent-pre">Loading /agents.md...</pre>
+        </div>
       </section>
     </aside>
   </main>

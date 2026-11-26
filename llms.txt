@@ -1,0 +1,31 @@
+# Saw Win Phay (WINPHAY)
+
+> Personal portfolio website of Saw Win Phay (`https://winphay.celestrionx.com`) — systems engineering, autonomous agent tooling, procedural WebGL graphics, and mini-blog under CelestrionX.
+
+## Machine-Readable Endpoints
+
+- [Agent Onboarding Contract](https://winphay.celestrionx.com/agents.md): Instructions for AI coding agents and MCP clients inspecting this portfolio.
+- [Homepage Markdown Mirror](https://winphay.celestrionx.com/index.md): Pure Markdown representation of the primary website and mini-blog index.
+- [Full Technical Profile](https://winphay.celestrionx.com/llms-full.txt): Extended system architecture notes, project capabilities, and blog catalog.
+- [Mini-Blog JSON Index](https://winphay.celestrionx.com/posts/index.json): Structured metadata for all published blog entries.
+
+## Featured Open-Source Systems
+
+- [Vessel (v0.6.0)](https://github.com/WinPhay/vessel): Local, time-traveling container sandbox engine for autonomous AI coding agents with filesystem checkpoints, Myers delta diffs, DLP redaction, git worktree isolation, and native stdio MCP tools.
+- [Auralis (v0.2.1)](https://github.com/Celestrionx/auralis): Headless audio graph compiler and auditory telemetry engine in pure Rust with built-in stdio MCP server and Hann FFT acoustic feedback.
+- [StellarPub](https://stellarpub.celestrionx.com): Burmese digital literature platform (`burmese-stories`) and OTA Godot 4 `.pck` story distribution.
+
+## Mini-Blog Articles (Raw Markdown)
+
+- [Zero-Asset Procedural South Beach in Three.js](https://winphay.celestrionx.com/posts/procedural-south-beach-threejs.md)
+- [Why Audio Agents Need Compilers and FFT Telemetry](https://winphay.celestrionx.com/posts/auralis-audio-telemetry.md)
+- [Time-Traveling Sandboxes for Coding Agents](https://winphay.celestrionx.com/posts/vessel-agent-sandboxes.md)
+
+## Network Nodes
+
+- [Primary Hub](https://www.celestrionx.com): CelestrionX organization umbrella (`hello@celestrionx.com`).
+- [GitHub Profile](https://github.com/WinPhay): Open-source repositories and release artifacts.
+
+## Contact
+
+- Email: `hello@celestrionx.com`
