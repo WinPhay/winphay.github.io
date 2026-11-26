@@ -10,9 +10,22 @@ const readerMetaEl = document.getElementById("reader-meta");
 const readerBodyEl = document.getElementById("reader-body");
 const backBtn = document.getElementById("back-to-posts");
 const tagButtons = document.querySelectorAll("[data-tag]");
+const docTabs = document.querySelectorAll("[data-doc]");
+const agentDocPre = document.getElementById("agent-doc-content");
+const agentRawLink = document.getElementById("agent-raw-link");
+const copyAgentDocBtn = document.getElementById("copy-agent-doc");
 
 let posts = [];
 let activeTag = "All";
+let activeAgentDoc = "agents.md";
+const agentDocCache = {};
+
+const AGENT_FALLBACK_DOCS = {
+  "agents.md": `# Saw Win Phay — Agent Onboarding\n\nFetch https://winphay.celestrionx.com/agents.md for full machine-readable endpoints and mini-blog raw Markdown URLs.`,
+  "llms.txt": `# Saw Win Phay (WINPHAY)\n\nPersonal portfolio website of Saw Win Phay (https://winphay.celestrionx.com).`,
+  "llms-full.txt": `# Saw Win Phay — Full Portfolio & Systems Reference\n\nLoad https://winphay.celestrionx.com/llms-full.txt over HTTP(S) for the complete reference.`,
+  "index.md": `# Saw Win Phay (WINPHAY)\n\nPersonal portfolio website of Saw Win Phay (https://winphay.celestrionx.com).`
+};
 
 function formatClock(hourFloat) {
   const wrapped = ((hourFloat % 24) + 24) % 24;
@@ -53,12 +66,73 @@ timeButtons.forEach((btn) => {
   });
 });
 
+async function loadAgentDoc(docName) {
+  activeAgentDoc = docName;
+  docTabs.forEach((tab) => {
+    const selected = tab.getAttribute("data-doc") === docName;
+    tab.classList.toggle("active", selected);
+    tab.setAttribute("aria-selected", String(selected));
+  });
+  if (agentRawLink) {
+    agentRawLink.setAttribute("href", docName);
+  }
+  if (!agentDocPre) return;
+
+  if (agentDocCache[docName]) {
+    agentDocPre.textContent = agentDocCache[docName];
+    return;
+  }
+
+  agentDocPre.textContent = `Loading /${docName}...`;
+  try {
+    const res = await fetch(`./${docName}`, { cache: "no-cache" });
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    const text = await res.text();
+    agentDocCache[docName] = text;
+    if (activeAgentDoc === docName) {
+      agentDocPre.textContent = text;
+    }
+  } catch (_) {
+    const fallback = AGENT_FALLBACK_DOCS[docName] || "";
+    agentDocCache[docName] = fallback;
+    if (activeAgentDoc === docName) {
+      agentDocPre.textContent = fallback;
+    }
+  }
+}
+
+docTabs.forEach((tab) => {
+  tab.addEventListener("click", () => {
+    const doc = tab.getAttribute("data-doc");
+    if (doc) loadAgentDoc(doc);
+  });
+});
+
+if (copyAgentDocBtn) {
+  copyAgentDocBtn.addEventListener("click", async () => {
+    const text = agentDocPre ? agentDocPre.textContent : "";
+    if (!text) return;
+    try {
+      await navigator.clipboard.writeText(text);
+      const orig = copyAgentDocBtn.textContent;
+      copyAgentDocBtn.textContent = "Copied ✓";
+      setTimeout(() => {
+        copyAgentDocBtn.textContent = orig;
+      }, 1500);
+    } catch (_) {}
+  });
+}
+
 function setLayout(mode) {
-  const normalized = mode === "side" || mode === "hidden" ? mode : "wide";
+  const valid = mode === "side" || mode === "hidden" || mode === "agent";
+  const normalized = valid ? mode : "wide";
   document.body.setAttribute("data-layout", normalized);
   layoutButtons.forEach((btn) => {
     btn.classList.toggle("active", btn.getAttribute("data-layout-target") === normalized);
   });
+  if (normalized === "agent") {
+    loadAgentDoc(activeAgentDoc);
+  }
 }
 
 layoutButtons.forEach((btn) => {
@@ -67,7 +141,7 @@ layoutButtons.forEach((btn) => {
   });
 });
 
-// Allow deterministic URL preview: ?time=dawn|noon|dusk|night or ?hour=22.5&ui=side|hidden
+// Allow deterministic URL preview: ?time=dawn|noon|dusk|night or ?hour=22.5&ui=side|agent|hidden&mode=agent
 (function applyUrlTime() {
   const params = new URLSearchParams(window.location.search);
   const t = (params.get("time") || "").toLowerCase();
@@ -79,8 +153,8 @@ layoutButtons.forEach((btn) => {
     beach.setHourOverride(Number(h));
     timeButtons.forEach((b) => b.classList.remove("active"));
   }
-  const ui = (params.get("ui") || "").toLowerCase();
-  if (ui === "hidden" || ui === "side" || ui === "wide") {
+  const ui = (params.get("ui") || params.get("mode") || "").toLowerCase();
+  if (ui === "hidden" || ui === "side" || ui === "agent" || ui === "wide") {
     setLayout(ui);
   }
 })();
