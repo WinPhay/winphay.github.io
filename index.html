@@ -1,70 +1,117 @@
-<!Please Don't Fix the Page...>
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-	<title>NP - New Player' Home</title>
-	<meta charset="utf-8"/>
-	<meta name="viewport" content="width=device-width" initial-scale=1.0"/>
-	<meta author="Win Phay"/>
-	<link href="css/bootstrap.min.css" rel="stylesheet"/>
-	<link href="css/style.css" rel="stylesheet"/>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Saw Win Phay — Systems &amp; Creative Engineering</title>
+  <meta name="description" content="Personal Three.js south-facing shoreline & engineering mini-blog by Saw Win Phay (CelestrionX, Vessel, Auralis)." />
+  <link rel="canonical" href="https://winphay.celestrionx.com" />
+  <link rel="icon" href="data:," />
+  <link rel="stylesheet" href="styles.css" />
+
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "./vendor/three.module.min.js"
+      }
+    }
+  </script>
 </head>
-<body>
-	<script src="js/jquery-2.2.0.min.js"></script>
-	<script src="js/bootstrap.min.js"></script>
-	<div id="fb-root"></div>
-<script>(function(d, s, id) {
-  var js, fjs = d.getElementsByTagName(s)[0];
-  if (d.getElementById(id)) return;
-  js = d.createElement(s); js.id = id;
-  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.7&appId=1128568017194428";
-  fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));</script>
-	<div class="header" style="width:100%;height:100%;">
-		<div>
-			<center><h1>Hi! I'm Saw Win Phay</h1></center>
-		</div>
-		<nav class="navbar navbar-inverse no-margin no-padding" role="navigation">
-		<div class=="container-fluid">
-			<div class="navbar-header">
-				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-win-navbar-collapse-1">
-					<span class="sr-only">Toggle-navigation</span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-				</button>
-				<a class="navbar-brand" href="index.html"><h4>Home...</h4></a>
-			</div>
-			<div class="collapse nav-tabs navbar-collapse navbar-right" id="bs-win-navbar-collapse-1">
-				<ul class="nav navbar-nav nav-tabs">
-					<li><a href="index.html">Home</a></li>
-					<li><a href="about.html">About</a></li>
-					<li><a href="contact.html">Contact</a></li>
-				</ul>
-			</div>
-   </nav>
-   <center><div class="fb-follow" data-href="https://www.facebook.com/saw.winphay" data-layout="standard" data-size="large" data-show-faces="true" style="padding-top:30px;"></div></center>
-	
-  <div class="jambotron">
-  <footer class="mi-footer">
-			<div class="container-fluid">
-				<div class="row">
-				<div class="mi-buttom-footer">
-					<div class="col-sm-4 col-md-8">
-						<address>I'm hosted with <a href="https://pages.github.com/">GitHub Pages</a> & decorated with <a href="http://getbootstrap.com/"> BootStrap</a>.</address>
-					</div>
-					<div class="col-sm-8 col-md-4">
-						<ul class="footer-nav">
-							<li><a href="index.html">Home</a></li>
-							<li><a href="about.html">About</a></li>
-							<li><a href="contact.html">Contact</a></li>
-						</ul>
-					</div>
-				</div>
-			</div>
-	</footer>
-	</div>
-	</div>
+<body data-layout="wide">
+  <canvas id="beach-canvas" aria-label="Interactive 3D South-facing beach synced to local time"></canvas>
+
+  <header class="hud-top">
+    <div class="hud-brand">
+      <span class="brand-dot" aria-hidden="true"></span>
+      <div>
+        <div class="brand-title">WINPHAY</div>
+        <div class="brand-sub" id="sky-telemetry">SOUTH · --:-- · SYNCING</div>
+      </div>
+    </div>
+
+    <div class="hud-controls">
+      <div class="compass-pill" title="Camera faces South; East is Left, West is Right">
+        <span>E</span>
+        <span class="sep">←</span>
+        <strong>S</strong>
+        <span class="sep">→</span>
+        <span>W</span>
+      </div>
+
+      <div class="time-pills" role="group" aria-label="Time of day preview">
+        <button type="button" class="pill-btn active" data-time="live">Live</button>
+        <button type="button" class="pill-btn" data-time="6.1">Dawn</button>
+        <button type="button" class="pill-btn" data-time="12.5">Noon</button>
+        <button type="button" class="pill-btn" data-time="18.15">Dusk</button>
+        <button type="button" class="pill-btn" data-time="22.8">Night</button>
+      </div>
+
+      <div class="layout-pills" role="group" aria-label="Layout mode">
+        <button type="button" class="pill-btn active" data-layout-target="wide">Wide</button>
+        <button type="button" class="pill-btn" data-layout-target="side">Side</button>
+        <button type="button" class="pill-btn" data-layout-target="hidden">Hide UI</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="shell" id="overlay-shell">
+    <div class="beach-window-spacer" aria-hidden="true"></div>
+    <aside class="glass-panel" aria-label="Profile and Mini-Blog">
+      <div class="hero-grid">
+        <section class="intro-block">
+          <p class="kicker">SYSTEMS · AGENTS · DIGITAL CRAFT</p>
+          <h1>Saw Win Phay</h1>
+          <p class="bio">
+            Building deterministic sandboxes (<a href="https://github.com/WinPhay/vessel" target="_blank" rel="noopener noreferrer">Vessel</a>),
+            headless audio compilers (<a href="https://github.com/Celestrionx/auralis" target="_blank" rel="noopener noreferrer">Auralis</a>),
+            and digital publishing (<a href="https://stellarpub.celestrionx.com" target="_blank" rel="noopener noreferrer">StellarPub</a>) under
+            <a href="https://www.celestrionx.com" target="_blank" rel="noopener noreferrer">CelestrionX</a>.
+          </p>
+
+          <div class="quick-links">
+            <a href="https://github.com/WinPhay" target="_blank" rel="noopener noreferrer">GitHub</a>
+            <a href="https://www.celestrionx.com" target="_blank" rel="noopener noreferrer">CelestrionX</a>
+            <a href="https://stellarpub.celestrionx.com" target="_blank" rel="noopener noreferrer">StellarPub</a>
+            <a href="mailto:hello@celestrionx.com">Contact</a>
+          </div>
+        </section>
+
+        <section class="systems-block" aria-label="Featured Systems">
+          <div class="systems-card">
+            <span class="sys-tag">SANDBOX · MCP</span>
+            <strong>Vessel</strong>
+            <p>Containerized execution shield, sub-second checkpoints, DLP redaction &amp; git worktrees.</p>
+          </div>
+          <div class="systems-card">
+            <span class="sys-tag">AUDIO · RUST</span>
+            <strong>Auralis</strong>
+            <p>Offline audio graph compiler with static pre-linting &amp; Hann FFT telemetry loops.</p>
+          </div>
+        </section>
+      </div>
+
+      <section class="blog-block" aria-label="Mini-Blog">
+        <div class="blog-header">
+          <h2>Mini-Blog</h2>
+          <div class="tag-filters" id="tag-filters">
+            <button type="button" class="tag-btn active" data-tag="All">All</button>
+            <button type="button" class="tag-btn" data-tag="Graphics">Graphics</button>
+            <button type="button" class="tag-btn" data-tag="AI">AI</button>
+            <button type="button" class="tag-btn" data-tag="Systems">Systems</button>
+          </div>
+        </div>
+
+        <div id="post-list" class="post-list"></div>
+
+        <article id="post-reader" class="post-reader hidden" aria-live="polite">
+          <button type="button" class="back-btn" id="back-to-posts">← All Posts</button>
+          <div class="reader-meta" id="reader-meta"></div>
+          <div class="reader-body" id="reader-body"></div>
+        </article>
+      </section>
+    </aside>
+  </main>
+
+  <script type="module" src="app.js"></script>
 </body>
 </html>
