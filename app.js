@@ -1,5 +1,3 @@
-import { initSouthBeachScene } from "./scene.js";
-
 const canvas = document.getElementById("beach-canvas");
 const telemetryEl = document.getElementById("sky-telemetry");
 const timeButtons = document.querySelectorAll("[data-time]");
@@ -34,16 +32,28 @@ function formatClock(hourFloat) {
   return `${String(h).padStart(2, "0")}:${String(m).padStart(2, "0")}`;
 }
 
-let beach = { setHourOverride() {} };
-try {
-  beach = initSouthBeachScene(canvas, ({ hour, phase, isLive, fireActive }) => {
-    const modeTag = isLive ? "LIVE" : "PREVIEW";
-    const fireTag = fireActive ? " · CAMPFIRE" : "";
-    telemetryEl.textContent = `SOUTH · ${formatClock(hour)} · ${phase}${fireTag} (${modeTag})`;
-  });
-} catch (err) {
-  telemetryEl.textContent = "SOUTH · 2D FALLBACK (WEBGL UNAVAILABLE)";
-  console.error("WebGL initialization failed:", err);
+let pendingHourOverride;
+let beach = {
+  setHourOverride(val) {
+    pendingHourOverride = val;
+  }
+};
+
+async function loadBeachScene() {
+  try {
+    const { initSouthBeachScene } = await import("./scene.js");
+    beach = initSouthBeachScene(canvas, ({ hour, phase, isLive, fireActive }) => {
+      const modeTag = isLive ? "LIVE" : "PREVIEW";
+      const fireTag = fireActive ? " · CAMPFIRE" : "";
+      telemetryEl.textContent = `SOUTH · ${formatClock(hour)} · ${phase}${fireTag} (${modeTag})`;
+    });
+    if (pendingHourOverride !== undefined) {
+      beach.setHourOverride(pendingHourOverride);
+    }
+  } catch (err) {
+    telemetryEl.textContent = "SOUTH · 2D FALLBACK (WEBGL UNAVAILABLE)";
+    console.error("WebGL initialization failed:", err);
+  }
 }
 
 function setTimePreset(val) {
@@ -302,3 +312,9 @@ async function initBlog() {
 }
 
 initBlog();
+
+if ("requestIdleCallback" in window) {
+  requestIdleCallback(() => loadBeachScene(), { timeout: 600 });
+} else {
+  setTimeout(loadBeachScene, 50);
+}

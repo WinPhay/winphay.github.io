@@ -1,5 +1,5 @@
 :root {
-  --glass-bg: rgba(8, 13, 24, 0.72);
+  --glass-bg: rgba(8, 13, 24, 0.84);
   --glass-border: rgba(148, 163, 184, 0.22);
   --text: #f8fafc;
   --text-soft: #cbd5e1;
@@ -585,6 +585,11 @@ body[data-layout="side"] .post-list {
 
   .beach-window-spacer {
     height: clamp(240px, 42vh, 360px);
+  }
+
+  .pill-btn,
+  .tag-btn {
+    min-height: 40px;
   }
 }
 

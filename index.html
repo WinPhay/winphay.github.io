@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Saw Win Phay — Systems &amp; Creative Engineering</title>
   <meta name="description" content="Personal portfolio website of Saw Win Phay." />
-  <link rel="canonical" href="https://winphay.celestrionx.com" />
+  <link rel="canonical" href="https://winphay.celestrionx.com/" />
   <link rel="alternate" type="text/markdown" href="https://winphay.celestrionx.com/index.md" />
   <link rel="help" type="text/plain" href="https://winphay.celestrionx.com/llms.txt" />
   <link rel="help" type="text/plain" href="https://winphay.celestrionx.com/llms-full.txt" />
@@ -39,6 +39,8 @@
     }
   </script>
 
+  <link rel="modulepreload" href="app.js" />
+  <link rel="preload" as="fetch" href="posts/index.json" crossorigin />
   <link rel="stylesheet" href="styles.css" />
 
   <script type="importmap">
@@ -171,14 +173,14 @@
         </div>
 
         <div class="doc-tabs" role="tablist" aria-label="Agent documents">
-          <button type="button" class="tag-btn active" role="tab" data-doc="agents.md" aria-selected="true">/agents.md</button>
-          <button type="button" class="tag-btn" role="tab" data-doc="llms.txt" aria-selected="false">/llms.txt</button>
-          <button type="button" class="tag-btn" role="tab" data-doc="llms-full.txt" aria-selected="false">/llms-full.txt</button>
-          <button type="button" class="tag-btn" role="tab" data-doc="index.md" aria-selected="false">/index.md</button>
+          <button type="button" class="tag-btn active" role="tab" data-doc="agents.md" aria-selected="true" aria-controls="agent-doc-content">/agents.md</button>
+          <button type="button" class="tag-btn" role="tab" data-doc="llms.txt" aria-selected="false" aria-controls="agent-doc-content">/llms.txt</button>
+          <button type="button" class="tag-btn" role="tab" data-doc="llms-full.txt" aria-selected="false" aria-controls="agent-doc-content">/llms-full.txt</button>
+          <button type="button" class="tag-btn" role="tab" data-doc="index.md" aria-selected="false" aria-controls="agent-doc-content">/index.md</button>
         </div>
 
         <div class="agent-code-wrap">
-          <pre id="agent-doc-content" class="agent-pre">Loading /agents.md...</pre>
+          <pre id="agent-doc-content" class="agent-pre" role="tabpanel">Loading /agents.md...</pre>
         </div>
       </section>
     </aside>

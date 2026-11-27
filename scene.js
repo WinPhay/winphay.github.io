@@ -184,7 +184,7 @@ function createSandTexture(size = 512) {
   ctx.fillStyle = "#c8b08a";
   ctx.fillRect(0, 0, size, size);
 
-  for (let i = 0; i < 16000; i++) {
+  for (let i = 0; i < 4000; i++) {
     const x = (Math.sin(i * 12.9898) * 43758.5453 % 1 + 1) % 1 * size;
     const y = (Math.sin(i * 78.233) * 19341.123 % 1 + 1) % 1 * size;
     const shade = i % 3 === 0 ? "rgba(255,244,218,0.16)" : "rgba(92,70,45,0.14)";
@@ -230,7 +230,7 @@ export function initSouthBeachScene(canvas, onTelemetry) {
     antialias: true,
     powerPreference: "high-performance"
   });
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, window.innerWidth < 860 ? 1.5 : 2));
   renderer.setSize(window.innerWidth, window.innerHeight);
   renderer.toneMapping = THREE.ACESFilmicToneMapping;
   renderer.toneMappingExposure = 1.05;
